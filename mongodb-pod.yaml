@@ -4,19 +4,22 @@ metadata:
   name: mongodb
 spec:
   volumes:
-  - name: pv-storage-0001
-    persistentVolumeClaim:
-      claimName: pv0001-claim
+  - name: mongodata-db
+    hostPath: 
+      path: /data/mongodata/db 
+      type: DirectoryOrCreate
+  - name: mongodata-configdb
+    hostPath:
+      path: /data/mongodata/configdb
+      type: DirectoryOrCreate
   containers:
   - name: mongodb
     image: mongo
     volumeMounts:
-    - mountPath: /data
-      name: pv-storage-0001
+    - name: mongodata-db
+      mountPath: /data/db
+    - name: mongodata-configdb
+      mountPath: /data/configdb
     ports:
     - containerPort: 27017
     imagePullPolicy: Always
-  #  hostPath:
-  #    #path: /Users/duyhsieh/k8s_volume/mongo
-  #    path: /data/mongo
-  #    type: Directory
