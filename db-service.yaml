@@ -10,4 +10,6 @@ spec:
     protocol: TCP
     targetPort: 27017
   selector:
-    app: mongodb-deployment
+      #app: mongodb-deployment 
+      # should match your mongo service name , otherwise they will not get connected
+    app: mongo-deployment
