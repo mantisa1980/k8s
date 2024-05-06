@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: v1
+    kind: Pod
+    metadata:
+      name: mongors1
+      labels:
+        app: mongodb
+        instance: mongors1
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:latest
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - name: mongo-storage
+          mountPath: /data/db
+      volumes:
+      - name: mongo-storage
+        persistentVolumeClaim:
+          claimName: pvc-mongors1
+  - apiVersion: v1
+    kind: Pod
+    metadata:
+      name: mongors2
+      labels:
+        app: mongodb
+        instance: mongors2
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:latest
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - name: mongo-storage
+          mountPath: /data/db
+      volumes:
+      - name: mongo-storage
+        persistentVolumeClaim:
+          claimName: pvc-mongors2
+  - apiVersion: v1
+    kind: Pod
+    metadata:
+      name: mongors3
+      labels:
+        app: mongodb
+        instance: mongors3
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:latest
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+        - name: mongo-storage
+          mountPath: /data/db
+      volumes:
+      - name: mongo-storage
+        persistentVolumeClaim:
+          claimName: pvc-mongors3

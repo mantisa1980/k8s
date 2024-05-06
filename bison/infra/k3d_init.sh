@@ -2,7 +2,9 @@
 # rename the k3d name or change its path, if necessary (ex. k3d.exe)
 # to delete cluster, run: (note: persistent volume of the cluster will be gone!)
 # k3d delete cluster CLUSTER_NAME
-~/k3d.exe cluster create bison
+#k3d cluster create bison --api-port 6550 -p "80:80@loadbalancer" -p "8000:8000@loadbalancer" --agents 2
+~/k3d.exe cluster create bison --api-port 6550 \
+-p "80:80@loadbalancer" -p "8000:8000@loadbalancer" -p "443:443@loadbalancer" --agents 2
 
 if [ $? -eq 0 ]; then
     echo "Cluster created successfully"
@@ -23,15 +25,13 @@ kubectl create -f ingress.yml
 
 cd ..
 # init redis
-cd database && \
+cd redis && \
 kubectl create -f redis-pv.yml &&\
 kubectl create -f redis-pvc.yml &&
 echo "waiting for 10 seconds for default service account to be ready ..."
 sleep 10
 kubectl create -f redis.yml &&\
 kubectl create -f redis-service.yml &&\
-
-
 
 cd ..
 echo "cluster initialized successfully!"

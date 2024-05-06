@@ -1,0 +1,37 @@
+# create a service so that the pods can access each other with a sticky service name (instead of dynamic IP address)
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: mongo1
+    spec:
+      ports:
+      - port: 27017
+        targetPort: 27017
+      selector:
+        app: mongodb
+        instance: mongors1
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: mongo2
+    spec:
+      ports:
+      - port: 27017
+        targetPort: 27017
+      selector:
+        app: mongodb
+        instance: mongors2
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: mongo3
+    spec:
+      ports:
+      - port: 27017
+        targetPort: 27017
+      selector:
+        app: mongodb
+        instance: mongors3
