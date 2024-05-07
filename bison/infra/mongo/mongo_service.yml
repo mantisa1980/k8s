@@ -5,33 +5,33 @@ items:
   - apiVersion: v1
     kind: Service
     metadata:
-      name: mongo1
+      name: mongo1a
     spec:
       ports:
-      - port: 27017
-        targetPort: 27017
+      - port: 27018
+        targetPort: 27018
       selector:
         app: mongodb
-        instance: mongors1
+        instance: mongors1a
   - apiVersion: v1
     kind: Service
     metadata:
-      name: mongo2
+      name: mongo1b
     spec:
       ports:
-      - port: 27017
-        targetPort: 27017
+      - port: 27018
+        targetPort: 27018
       selector:
         app: mongodb
-        instance: mongors2
+        instance: mongors1b
   - apiVersion: v1
     kind: Service
     metadata:
-      name: mongo3
+      name: mongo1c
     spec:
       ports:
-      - port: 27017
-        targetPort: 27017
+      - port: 27018
+        targetPort: 27018
       selector:
         app: mongodb
-        instance: mongors3
+        instance: mongors1c

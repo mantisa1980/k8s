@@ -4,7 +4,7 @@ items:
   - apiVersion: v1
     kind: PersistentVolume
     metadata:
-      name: pv-mongors1
+      name: pv-mongors1a
     spec:
       capacity:
         storage: 2Gi
@@ -13,11 +13,11 @@ items:
       persistentVolumeReclaimPolicy: Retain
       storageClassName: manual
       hostPath:
-        path: /mnt/data/mongors1
+        path: /mnt/data/mongors1a
   - apiVersion: v1
     kind: PersistentVolume
     metadata:
-      name: pv-mongors2
+      name: pv-mongors1b
     spec:
       capacity:
         storage: 2Gi
@@ -26,11 +26,11 @@ items:
       persistentVolumeReclaimPolicy: Retain
       storageClassName: manual
       hostPath:
-        path: /mnt/data/mongors2
+        path: /mnt/data/mongors1b
   - apiVersion: v1
     kind: PersistentVolume
     metadata:
-      name: pv-mongors3
+      name: pv-mongors1c
     spec:
       capacity:
         storage: 2Gi
@@ -39,11 +39,11 @@ items:
       persistentVolumeReclaimPolicy: Retain
       storageClassName: manual
       hostPath:
-        path: /mnt/data/mongors3
+        path: /mnt/data/mongors1c
   - apiVersion: v1
     kind: PersistentVolumeClaim
     metadata:
-      name: pvc-mongors1
+      name: pvc-mongors1a
     spec:
       accessModes:
         - ReadWriteOnce
@@ -54,7 +54,7 @@ items:
   - apiVersion: v1
     kind: PersistentVolumeClaim
     metadata:
-      name: pvc-mongors2
+      name: pvc-mongors1b
     spec:
       accessModes:
         - ReadWriteOnce
@@ -65,7 +65,7 @@ items:
   - apiVersion: v1
     kind: PersistentVolumeClaim
     metadata:
-      name: pvc-mongors3
+      name: pvc-mongors1c
     spec:
       accessModes:
         - ReadWriteOnce

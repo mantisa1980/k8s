@@ -1,0 +1,1 @@
+kubectl exec -ti mongors1a -- mongosh --port 27018 --eval "rs.initiate({_id: 'rs1', members: [{ _id: 0, host: 'mongo1a:27018', priority: 2 }, { _id: 1, host: 'mongo1b:27018', priority: 1 }, { _id: 2, host: 'mongo1c:27018', priority: 1 }]})"

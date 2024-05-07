@@ -13,8 +13,8 @@ else
     exit 1
 fi
 
-echo "waiting for 30 seconds..."
-sleep 30
+echo "waiting for 10 seconds..."
+sleep 10
 
 # init frontend
 cd frontend && kubectl create -f nginx.yml && kubectl create -f nginx_service.yml
@@ -32,7 +32,19 @@ echo "waiting for 10 seconds for default service account to be ready ..."
 sleep 10
 kubectl create -f redis.yml &&\
 kubectl create -f redis-service.yml &&\
-
 cd ..
+
+# init mongo
+cd mongo
+kubectl create -f disk.yml
+kubectl create -f mongo_replicaset.yml
+kubectl create -f mongo_service.yml
+
+echo "use kubectl get pods to check if all mongo pods are ready ... then press any key to continue"
+read dummy
+
+source init_rs1.sh
+
 echo "cluster initialized successfully!"
 echo "to port forward for internal redis service, run port_forward.sh manually"
+
