@@ -1,9 +1,8 @@
 #!/bin/bash
-# rename the k3d name or change its path, if necessary (ex. k3d.exe)
+# rename the k3d name or change its path, if necessary (ex. k3d.exe to k3d)
 # to delete cluster, run: (note: persistent volume of the cluster will be gone!)
-# k3d delete cluster CLUSTER_NAME
-#k3d cluster create bison --api-port 6550 -p "80:80@loadbalancer" -p "8000:8000@loadbalancer" --agents 2
-~/k3d.exe cluster create bison --api-port 6550 \
+# k3d delete cluster bison
+~/k3d cluster create bison --api-port 6550 \
 -p "80:80@loadbalancer" -p "8000:8000@loadbalancer" -p "443:443@loadbalancer" --agents 2
 
 if [ $? -eq 0 ]; then
@@ -35,11 +34,9 @@ kubectl create -f redis-service.yml &&\
 cd ..
 
 # init mongo
-cd mongo
-kubectl create -f disk.yml
-kubectl create -f mongo_replicaset.yml
-kubectl create -f mongo_service.yml
-
+cd mongo/statefulset
+kubectl create -f rs.yml
+kubectl create -f rs_svc.yml
 echo "use kubectl get pods to check if all mongo pods are ready ... then press any key to continue"
 read dummy
 

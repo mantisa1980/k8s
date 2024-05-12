@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongosvc
+spec:
+  ports:
+  - port: 27017
+    targetPort: 27018
+  clusterIP: None  # This makes the service "headless"
+  selector:
+    app: mongors1

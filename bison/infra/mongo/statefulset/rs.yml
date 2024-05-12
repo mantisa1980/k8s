@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongors1
+spec:
+  serviceName: "mongosvc"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mongors1
+  template:
+    metadata:
+      labels:
+        app: mongors1
+    spec:
+      containers:
+      - name: mongors1
+        image: mongo:latest
+        command: ["mongod"]
+        args:
+        - "--replSet"
+        - "rs1"
+        - "--port"
+        - "27018"
+        - "--bind_ip_all"
+        ports:
+        - containerPort: 27018
+        volumeMounts:
+        - name: mongo-storage
+          mountPath: /data/db
+  volumeClaimTemplates:
+  - metadata:
+      name: mongo-storage
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 4Gi

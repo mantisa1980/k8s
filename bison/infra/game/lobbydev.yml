@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lobbydev
+  labels:
+    app: lobbydev
+spec:
+  containers:
+  - name: lobby
+    image: bison-base
+    imagePullPolicy: Never  # Use Never if you want to ensure no pull attempts
+    ports:
+    - containerPort: 8000
+
+    command: ["sh"] # This overrides the default entrypoint
+    args:  # This overrides the default CMD
+        - "-c"
+        - "tail -f /dev/null"
+    env:  # Environment variables section should be inside the container spec
+    - name: "ENV"
+      valueFrom:  # Correct the field names to proper case sensitivity
+        configMapKeyRef:
+          name: "lobbydev-configmap"
+          key: "ENV"
+    - name: "GAMETYPE"
+      valueFrom:
+        configMapKeyRef:
+          name: "lobbydev-configmap"
+          key: "GAMETYPE"
