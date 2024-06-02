@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: lobbydev-configmap
+  name: lobby-configmap
 data:
   ENV: dev
   GAMETYPE: lobby

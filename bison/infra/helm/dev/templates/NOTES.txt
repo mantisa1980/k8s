@@ -1,0 +1,5 @@
+# to load bison image, run:
+k3d image load bison-base -c bison
+
+# to initiailze mongo replica set, run:
+cd scripts && bash init_rs.sh

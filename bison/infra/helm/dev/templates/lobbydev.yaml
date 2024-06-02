@@ -1,16 +1,16 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: lobbydev
+  name: lobby
   labels:
-    app: lobbydev
+    app: lobby
 spec:
   containers:
   - name: lobby
     image: bison-base
     imagePullPolicy: Never  # Use Never if you want to ensure no pull attempts
     ports:
-    - containerPort: 8000
+    - containerPort: 80
 
     command: ["sh"] # This overrides the default entrypoint
     args:  # This overrides the default CMD
@@ -20,10 +20,20 @@ spec:
     - name: "ENV"
       valueFrom:  # Correct the field names to proper case sensitivity
         configMapKeyRef:
-          name: "lobbydev-configmap"
+          name: "lobby-configmap"
           key: "ENV"
     - name: "GAMETYPE"
       valueFrom:
         configMapKeyRef:
-          name: "lobbydev-configmap"
+          name: "lobby-configmap"
           key: "GAMETYPE"
+    
+    volumeMounts:
+    - name: workdir
+      mountPath: /mnt/data
+
+  volumes:
+  - name: workdir
+    hostPath:
+      path: "/data"
+      type: Directory

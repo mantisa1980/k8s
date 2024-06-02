@@ -1,0 +1,9 @@
+# Default values for frontend.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+frontend:
+  replicaCount: 1
+
+mongodb:
+  replicaCount: 3
+  storageSize: 4Gi

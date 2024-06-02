@@ -4,7 +4,7 @@ metadata:
   name: mongors1
 spec:
   serviceName: "mongosvc"
-  replicas: 3
+  replicas: {{ .Values.mongodb.replicaCount }}
   selector:
     matchLabels:
       app: mongors1
@@ -35,4 +35,4 @@ spec:
       accessModes: ["ReadWriteOnce"]
       resources:
         requests:
-          storage: 4Gi
+          storage: {{ .Values.mongodb.storageSize }}
